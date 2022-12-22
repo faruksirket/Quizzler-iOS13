@@ -10,11 +10,18 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet var progressBar: UIProgressView!
+    @IBOutlet var trueButton: UIButton!
+    @IBOutlet var falseButton: UIButton!
+    @IBOutlet var questionLabel: UILabel!
+    let quiz = ["A slug's blood is green.", "Approximately one quarter of human bones are in the feet.", "The total surface area of two human lungs is approximately 70 square metres.",]
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        questionLabel.text = quiz[0]
     }
 
-
+    @IBAction func answerButtonPressed(_ sender: UIButton) {
+    }
+    
 }
 
