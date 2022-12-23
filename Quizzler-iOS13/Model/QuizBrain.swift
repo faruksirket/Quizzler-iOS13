@@ -1,19 +1,13 @@
 //
-//  ViewController.swift
+//  QuizBrain.swift
 //  Quizzler-iOS13
 //
-//  Created by Angela Yu on 12/07/2019.
-//  Copyright © 2019 The App Brewery. All rights reserved.
+//  Created by faruk sirket on 23.12.2022.
+//  Copyright © 2022 The App Brewery. All rights reserved.
 //
 
-import UIKit
-
-class ViewController: UIViewController {
-    
-    @IBOutlet var progressBar: UIProgressView!
-    @IBOutlet var trueButton: UIButton!
-    @IBOutlet var falseButton: UIButton!
-    @IBOutlet var questionLabel: UILabel!
+import Foundation
+struct QuizBrain {
     let quiz = [
         Question(q: "A slug's blood is green.", a: "True"),
         Question(q: "Approximately one quarter of human bones are in the feet.", a: "True"),
@@ -29,31 +23,40 @@ class ViewController: UIViewController {
         Question(q: "Chocolate affects a dog's heart and nervous system; a few ounces are enough to kill a small dog.", a: "True")
     ]
     var questionNumber = 0
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        updateUI()
-        
-        
+    var score = 0
+    
+    mutating func checkAnswer(_ userAnswer: String) -> Bool {
+        if userAnswer == quiz[questionNumber].answer {
+            //User got it right
+            score += 1
+            return true
+        }else {
+            //User got it wrong
+            score -= 1
+            return false
+        }
     }
-
-    @IBAction func answerButtonPressed(_ sender: UIButton) {
-        let userAnswer = sender.currentTitle
-        let actualAnswer = quiz[questionNumber].answer
+    
+    func getQuestion() -> String {
+        let question = quiz[questionNumber].text
+        return question
+    }
+    
+    func getProgress() -> Float {
+        let progress = Float(questionNumber + 1 ) / Float(quiz.count)
+        return progress
+    }
+    
+    mutating func nextQuestion(){
         if questionNumber + 1 < quiz.count {
             questionNumber += 1
         } else {
             questionNumber = 0
+            score = 0
         }
-        if userAnswer == actualAnswer {
-            print("Right")
-        } else {
-            print("Wrong")
-        }
-        updateUI()
-    }
-    func updateUI(){
-        questionLabel.text = quiz[questionNumber].text
     }
     
+    mutating func getScore() -> Int{
+        return score
+    }
 }
-
