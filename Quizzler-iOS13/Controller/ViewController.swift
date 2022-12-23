@@ -12,12 +12,14 @@ class ViewController: UIViewController {
     
     @IBOutlet var scoreLabel: UILabel!
     @IBOutlet var progressBar: UIProgressView!
-    @IBOutlet var trueButton: UIButton!
-    @IBOutlet var falseButton: UIButton!
+    @IBOutlet var choice1Button: UIButton!
+    @IBOutlet var choice2Button: UIButton!
+    @IBOutlet var choice3Button: UIButton!
     @IBOutlet var questionLabel: UILabel!
     var quizBrain = QuizBrain()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         updateUI()
         
         
@@ -39,8 +41,12 @@ class ViewController: UIViewController {
         questionLabel.text = quizBrain.getQuestion()
         progressBar.progress = quizBrain.getProgress()
         scoreLabel.text = "Score:\(quizBrain.getScore())"
-        trueButton.backgroundColor = UIColor.clear
-        falseButton.backgroundColor = UIColor.clear
+        choice1Button.setTitle(quizBrain.getAnswer1(), for: .normal)
+        choice2Button.setTitle(quizBrain.getAnswer2(), for: .normal)
+        choice3Button.setTitle(quizBrain.getAnswer3(), for: .normal)
+        choice1Button.backgroundColor = UIColor.clear
+        choice2Button.backgroundColor = UIColor.clear
+        choice3Button.backgroundColor = UIColor.clear
         
     }
     
